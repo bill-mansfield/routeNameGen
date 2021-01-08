@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 const validationSchema = yup.object({
   colour: yup
@@ -27,10 +29,12 @@ Airtable.configure({
 var base = new Airtable({apiKey: 'keywocKFwPXxgQPOe'}).base('appKdkAWeTiUMtTOI');
 
 const basic = () => {
+  const [airTableErr, setAirTableErr] = useState();
+
   const formik = useFormik({
     initialValues: {
-      Name: 'test1',
-      colour: 'blue?',
+      name: '',
+      colour: '',
       animal: '',
       country: '',
       climbingStyle: '',
@@ -47,6 +51,7 @@ const basic = () => {
         }
         records.forEach(function (record) {
           console.log(record.getId());
+          setAirTableErr(record.getId());
         });
       });
     },
@@ -55,6 +60,16 @@ const basic = () => {
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
+      <TextField
+          fullWidth
+          id="name"
+          name="name"
+          label="Name"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          error={formik.touched.name && Boolean(formik.errors.name)}
+          helperText={formik.touched.name && formik.errors.name}
+        />
         <TextField
           fullWidth
           id="colour"
@@ -101,6 +116,18 @@ const basic = () => {
         <Button color="primary" variant="contained" fullWidth type="submit">
           Submit
         </Button>
+        {
+        airTableErr ? 
+        <Alert severity="success">
+          <AlertTitle>Success!</AlertTitle>
+          Air Table submission id: {airTableErr}
+        </Alert> 
+        :
+        <Alert severity="error">
+          <AlertTitle>Fail!</AlertTitle>
+          Could not submit to Air Table.
+        </Alert>
+      }
       </form>
     </div>
   );
