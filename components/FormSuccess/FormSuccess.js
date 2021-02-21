@@ -3,14 +3,13 @@ import { Typography } from '@material-ui/core';
 
 function FormSuccess(airtable) {
 
-  console.log(airtable.recordId);
   return (
     <React.Fragment>
       <Typography variant="h5" gutterBottom>
         Thank you for your order.
       </Typography>
       <Typography variant="subtitle1">
-        Your order id is {airtable.recordId}. We have emailed your order confirmation,
+        Your order id is {airtable.airtable}. We have emailed your order confirmation,
         and will send you an update when your order has shipped.
       </Typography>
     </React.Fragment>

@@ -12,7 +12,7 @@ const {
     nameOnCard,
     cardNumber,
     expiryDate,
-    cvv
+    cvv,
   }
 } = checkoutFormModel;
 

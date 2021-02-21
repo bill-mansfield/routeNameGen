@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { InputField, CheckboxField, SelectField } from '../FormFields';
+import DropZone from '../FormFields/dropZone';
 
 const cities = [
   {
@@ -70,7 +71,8 @@ export default function AddressForm(props) {
       state,
       zipcode,
       country,
-      useAddressForPaymentDetails
+      useAddressForPaymentDetails,
+      uploadUrl
     }
   } = props;
   return (
@@ -125,6 +127,7 @@ export default function AddressForm(props) {
           />
         </Grid>
       </Grid>
+      <DropZone url={uploadUrl} />
     </React.Fragment>
   );
 }

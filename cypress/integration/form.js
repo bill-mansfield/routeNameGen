@@ -39,8 +39,18 @@ describe('Step One', () => {
     cy.contains('Italy').click();
     cy.get('input[name=useAddressForPaymentDetails]').click();
 
-    cy.get('[type=submit]').click()
   })
+
+  it('Testing picture uploading', () => {
+    cy.fixture('testPicture.png').then(fileContent => {
+        cy.get('input[type="file"]').attachFile({
+            fileContent: fileContent.toString(),
+            fileName: 'testPicture.png',
+            mimeType: 'image/png'
+        });
+    });
+    cy.get('[type=submit]').click()
+});
 })
 
 describe('Step Two', () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, setState } from 'react';
 import {
   Stepper,
   Step,
@@ -44,12 +44,7 @@ export default function Base() {
   const currentValidationSchema = validationSchema[activeStep];
   const isLastStep = activeStep === steps.length - 1;
 
-  const sleep = (ms) => {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  const submitForm = async (values, actions) => {
-    await sleep(1000);
+  const submitForm = (values, actions) => {
     actions.setSubmitting(false);
     setActiveStep(activeStep + 1);
 
@@ -60,7 +55,7 @@ export default function Base() {
         console.log(err);
         return;
       }
-      records.forEach(function (record) {
+      records.forEach(function async (record) {
         console.log(record.getId());
         setRecordId(record.getId());
       });
@@ -68,6 +63,7 @@ export default function Base() {
   }
 
   const handleSubmit = (values, actions) => {
+    console.log(values);
     if (isLastStep) {
       submitForm(values, actions);
       actions.setSubmitting(true);
@@ -77,6 +73,7 @@ export default function Base() {
       actions.setSubmitting(false);
     }
   }
+
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);

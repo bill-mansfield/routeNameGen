@@ -4,6 +4,7 @@ import { Typography, Grid } from '@material-ui/core';
 import ProductDetails from './ProductDetails';
 import ShippingDetails from './ShippingDetails';
 import PaymentDetails from './PaymentDetails';
+import DropZone from '../FormFields/dropZone';
 
 export default function ReviewOrder() {
   const { values: formValues } = useFormikContext();

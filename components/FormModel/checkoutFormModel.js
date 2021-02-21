@@ -66,6 +66,12 @@ export default {
       label: 'CVV*',
       requiredErrorMsg: 'CVV is required',
       invalidErrorMsg: 'CVV is invalid (e.g. 357)'
+    },
+    uploadUrl: {
+      name: 'uploadUrl',
+      label: 'Upload Url',
+      requiredErrorMsg: 'Upload Url is required',
+      invalidErrorMsg: 'Upload Url is invalid.'
     }
   }
 };
